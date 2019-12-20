@@ -12,7 +12,7 @@ class Runner:
         last_reward = [None] * len(self.solvers)
         last_arm = [None] * len(self.solvers)
         exp_returns = [0] * len(self.solvers)
-        best_possible = [0] * len(self.solvers) # technically don't need an array for this
+        best_possible = [0] * len(self.solvers)
         regrets = []
         for _ in range(n_steps):
             for i, solver in enumerate(self.solvers):
@@ -36,19 +36,12 @@ class MultiRunner:
         solvers = [x() for x in self.solvers_cls]
         self.runner = Runner(bandits, solvers)
         
-    def run_all(self, n_steps, n_runs, multiprocess=False):
+    def run_all(self, n_steps, n_runs):
         multi_regrets = []
-        if multiprocess:
-            pool = multiprocessing.Pool(processes=4)
-            iterator = pool.imap_unordered(self.multiprocess_run, [n_steps] * n_runs)
-            pool.close()
-            pool.join()
-            multi_regrets = list(iterator)
-        else:
-            for run in tqdm(range(n_runs)):
-                self.reset()
-                regrets = self.runner.run_all(n_steps)
-                multi_regrets.append(regrets)
+        for run in tqdm(range(n_runs)):
+            self.reset()
+            regrets = self.runner.run_all(n_steps)
+            multi_regrets.append(regrets)
         multi_regrets = np.array(multi_regrets)
         multi_regrets = np.sum(multi_regrets, axis=0) / n_runs
         return multi_regrets

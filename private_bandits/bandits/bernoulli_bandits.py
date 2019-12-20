@@ -9,7 +9,6 @@ class BernoulliBandits:
         else:
             self.probs = probs
         rounded_probs = np.round(self.probs, decimals=2)
-#         print(f'Actual bandits params: {rounded_probs}')
         self.max_prob = max(self.probs)
                 
     def pull_arm(self, i):

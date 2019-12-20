@@ -86,7 +86,8 @@ def main(argv):
 	plt.yticks(fontsize=15)
 	plt.title(f'{FLAGS.n_arms} arms (Averaged over {FLAGS.n_runs} runs)', fontsize=30)
 	plt.legend(prop={'size': 20})
-	plt.savefig(f'private_bandits/results/{FLAGS.n_arms}_arms_{FLAGS.p_epsilon}_eps_{FLAGS.T}_T_{FLAGS.probs is not None}_preset_probs.png')
+	safe_eps = str(FLAGS.p_epsilon).replace('.', '_')
+	plt.savefig(f'private_bandits/results/{FLAGS.n_arms}_arms_{safe_eps}_eps_{FLAGS.T}_T_{FLAGS.probs is not None}_preset_probs.png')
 
 
 if __name__ == '__main__':

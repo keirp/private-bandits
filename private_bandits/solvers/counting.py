@@ -19,7 +19,6 @@ class PrivateMechanismCountingSolver(Solver):
         self.T = T
         self.counts = [0] * self.n_arms
         self.epsilon = epsilon
-#         self.epsilon_zero = self.epsilon / self.n_arms
         self.epsilon_zero = self.epsilon
         self.summers = [mech_cls(self.T, self.epsilon_zero) for _ in range(self.n_arms)]
         self.estimates = [None] * self.n_arms
@@ -38,7 +37,6 @@ class EquitablePrivateMechanismCountingSolver(Solver):
         self.T = T
         self.counts = [0] * self.n_arms
         self.epsilon = epsilon
-#         self.epsilon_zero = self.epsilon / self.n_arms
         self.epsilon_zero = self.epsilon
         self.summers = [mech_cls(self.T, self.epsilon_zero) for _ in range(self.n_arms)]
         self.estimates = [None] * self.n_arms

@@ -59,8 +59,6 @@ def generate_experiment_data(n_arms, probs, p_epsilon, T, n_runs):
                                dp_log_softmax_solver,
                                dp_binary_softmax_solver])
 
-	# runner = MultiRunner(bandits, [dp_log_softmax_solver, dp_binary_softmax_solver, private_ucb_boundless_solver])
-
 	return runner.run_all(T, n_runs), [str(c()) for c in runner.solvers_cls]
 
 def main(argv):
